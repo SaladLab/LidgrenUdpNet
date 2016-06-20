@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LidgrenUdpNet", "core\LidgrenUdpNet\LidgrenUdpNet.csproj", "{4A74EEE7-05A2-4D0C-A62D-90BA7013D636}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{C6C13CBA-6E54-4F7C-B739-DA09CE225B2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LidgrenUdpNet.Net35", "core\LidgrenUdpNet.Net35\LidgrenUdpNet.Net35.csproj", "{5F831865-1A6B-457F-ABBE-5CA4CED7B2EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LidgrenUdpNet.Unity3D", "core\LidgrenUdpNet.Unity3D\LidgrenUdpNet.Unity3D.csproj", "{1F6FD2C9-372E-46BC-B747-F47B8AD0679A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A74EEE7-05A2-4D0C-A62D-90BA7013D636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A74EEE7-05A2-4D0C-A62D-90BA7013D636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A74EEE7-05A2-4D0C-A62D-90BA7013D636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A74EEE7-05A2-4D0C-A62D-90BA7013D636}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F831865-1A6B-457F-ABBE-5CA4CED7B2EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F831865-1A6B-457F-ABBE-5CA4CED7B2EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F831865-1A6B-457F-ABBE-5CA4CED7B2EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F831865-1A6B-457F-ABBE-5CA4CED7B2EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F6FD2C9-372E-46BC-B747-F47B8AD0679A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F6FD2C9-372E-46BC-B747-F47B8AD0679A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F6FD2C9-372E-46BC-B747-F47B8AD0679A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F6FD2C9-372E-46BC-B747-F47B8AD0679A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4A74EEE7-05A2-4D0C-A62D-90BA7013D636} = {C6C13CBA-6E54-4F7C-B739-DA09CE225B2C}
+		{5F831865-1A6B-457F-ABBE-5CA4CED7B2EA} = {C6C13CBA-6E54-4F7C-B739-DA09CE225B2C}
+		{1F6FD2C9-372E-46BC-B747-F47B8AD0679A} = {C6C13CBA-6E54-4F7C-B739-DA09CE225B2C}
+	EndGlobalSection
+EndGlobal

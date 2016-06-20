@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5F831865-1A6B-457F-ABBE-5CA4CED7B2EA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LidgrenUdpNet</RootNamespace>
+    <AssemblyName>LidgrenUdpNet</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\LidgrenUdpNet.xml</DocumentationFile>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\LidgrenUdpNet\Encryption\NetAESEncryption.cs">
+      <Link>Encryption\NetAESEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Encryption\NetBlockEncryptionBase.cs">
+      <Link>Encryption\NetBlockEncryptionBase.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Encryption\NetCryptoProviderBase.cs">
+      <Link>Encryption\NetCryptoProviderBase.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Encryption\NetCryptoProviderEncryption.cs">
+      <Link>Encryption\NetCryptoProviderEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Encryption\NetDESEncryption.cs">
+      <Link>Encryption\NetDESEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Encryption\NetEncryption.cs">
+      <Link>Encryption\NetEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Encryption\NetRC2Encryption.cs">
+      <Link>Encryption\NetRC2Encryption.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Encryption\NetTripleDESEncryption.cs">
+      <Link>Encryption\NetTripleDESEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Encryption\NetXorEncryption.cs">
+      <Link>Encryption\NetXorEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Encryption\NetXteaEncryption.cs">
+      <Link>Encryption\NetXteaEncryption.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NamespaceDoc.cs">
+      <Link>NamespaceDoc.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetBigInteger.cs">
+      <Link>NetBigInteger.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetBitVector.cs">
+      <Link>NetBitVector.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetBitWriter.cs">
+      <Link>NetBitWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetBuffer.cs">
+      <Link>NetBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetBuffer.Peek.cs">
+      <Link>NetBuffer.Peek.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetBuffer.Read.cs">
+      <Link>NetBuffer.Read.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetBuffer.Read.Reflection.cs">
+      <Link>NetBuffer.Read.Reflection.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetBuffer.Write.cs">
+      <Link>NetBuffer.Write.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetBuffer.Write.Reflection.cs">
+      <Link>NetBuffer.Write.Reflection.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetClient.cs">
+      <Link>NetClient.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetConnection.cs">
+      <Link>NetConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetConnection.Handshake.cs">
+      <Link>NetConnection.Handshake.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetConnection.Latency.cs">
+      <Link>NetConnection.Latency.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetConnection.MTU.cs">
+      <Link>NetConnection.MTU.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetConnectionStatistics.cs">
+      <Link>NetConnectionStatistics.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetConnectionStatus.cs">
+      <Link>NetConnectionStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetConstants.cs">
+      <Link>NetConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetDeliveryMethod.cs">
+      <Link>NetDeliveryMethod.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetException.cs">
+      <Link>NetException.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetFragmentationHelper.cs">
+      <Link>NetFragmentationHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetFragmentationInfo.cs">
+      <Link>NetFragmentationInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetIncomingMessage.cs">
+      <Link>NetIncomingMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetIncomingMessageType.cs">
+      <Link>NetIncomingMessageType.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetMessageType.cs">
+      <Link>NetMessageType.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetNatIntroduction.cs">
+      <Link>NetNatIntroduction.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetOutgoingMessage.cs">
+      <Link>NetOutgoingMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetPeer.cs">
+      <Link>NetPeer.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetPeer.Discovery.cs">
+      <Link>NetPeer.Discovery.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetPeer.Fragmentation.cs">
+      <Link>NetPeer.Fragmentation.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetPeer.Internal.cs">
+      <Link>NetPeer.Internal.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetPeer.LatencySimulation.cs">
+      <Link>NetPeer.LatencySimulation.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetPeer.Logging.cs">
+      <Link>NetPeer.Logging.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetPeer.MessagePools.cs">
+      <Link>NetPeer.MessagePools.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetPeer.Send.cs">
+      <Link>NetPeer.Send.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetPeerConfiguration.cs">
+      <Link>NetPeerConfiguration.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetPeerStatistics.cs">
+      <Link>NetPeerStatistics.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetPeerStatus.cs">
+      <Link>NetPeerStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetQueue.cs">
+      <Link>NetQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetRandom.cs">
+      <Link>NetRandom.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetRandom.Implementations.cs">
+      <Link>NetRandom.Implementations.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetRandomSeed.cs">
+      <Link>NetRandomSeed.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetReceiverChannelBase.cs">
+      <Link>NetReceiverChannelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetReliableOrderedReceiver.cs">
+      <Link>NetReliableOrderedReceiver.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetReliableSenderChannel.cs">
+      <Link>NetReliableSenderChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetReliableSequencedReceiver.cs">
+      <Link>NetReliableSequencedReceiver.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetReliableUnorderedReceiver.cs">
+      <Link>NetReliableUnorderedReceiver.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetSenderChannelBase.cs">
+      <Link>NetSenderChannelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetSendResult.cs">
+      <Link>NetSendResult.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetServer.cs">
+      <Link>NetServer.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetSRP.cs">
+      <Link>NetSRP.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetStoredReliableMessage.cs">
+      <Link>NetStoredReliableMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetTime.cs">
+      <Link>NetTime.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetTuple.cs">
+      <Link>NetTuple.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetUnreliableSenderChannel.cs">
+      <Link>NetUnreliableSenderChannel.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetUnreliableSequencedReceiver.cs">
+      <Link>NetUnreliableSequencedReceiver.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetUnreliableUnorderedReceiver.cs">
+      <Link>NetUnreliableUnorderedReceiver.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetUPnP.cs">
+      <Link>NetUPnP.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\NetUtility.cs">
+      <Link>NetUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Platform\PlatformAndroid.cs">
+      <Link>Platform\PlatformAndroid.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Platform\PlatformConstrained.cs">
+      <Link>Platform\PlatformConstrained.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Platform\PlatformUnityExtras.cs">
+      <Link>Platform\PlatformUnityExtras.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Platform\PlatformWin32.cs">
+      <Link>Platform\PlatformWin32.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Platform\PlatformWinRT.cs">
+      <Link>Platform\PlatformWinRT.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\LidgrenUdpNet\Properties\AssemblyInfoGenerated.cs">
+      <Link>Properties\AssemblyInfoGenerated.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
