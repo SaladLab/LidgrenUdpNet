@@ -1,6 +1,6 @@
 {
   "id": "LidgrenUdpNet",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "authors": [ "Michael Lidgren" ],
   "owners": [ "Esun Kim" ],
   "description": "Modifier version of Lidgren.Network",
