@@ -50,6 +50,40 @@ namespace LidgrenUdpNet
 			await server.StopAsync();
 		}
 
+		[Fact]
+		public async Task ClientCommunicateWithServer_WithEndPointChanged()
+		{
+			// Arrange
+
+			var server = CreateEchoServer();
+			var clientTuple = CreateClient();
+			var client = clientTuple.Item1;
+			var recvStrs = clientTuple.Item2;
+			var connected = await client.ConnectAsync(new IPEndPoint(IPAddress.Loopback, server.Server.Configuration.Port));
+			Assert.True(connected);
+
+			// Act
+
+			var sentStrs = new List<string>();
+			for (int i = 0; i < 10; i++)
+			{
+				var str = "TestMessage:" + i;
+				sentStrs.Add(str);
+				var msg = client.Client.CreateMessage(str);
+				client.Connection.SendMessage(msg, NetDeliveryMethod.ReliableOrdered, 0);
+				if (i == 5)
+					client.Client.BindSocketForTest();
+			}
+
+			await Task.Delay(1000);
+
+			// Assert
+
+			Assert.Equal(sentStrs, recvStrs);
+
+			await client.StopAsync();
+			await server.StopAsync();
+		}
 
 		[Fact]
 		public async Task MutipleClientCommunicateWithServer()

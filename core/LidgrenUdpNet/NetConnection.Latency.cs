@@ -61,7 +61,7 @@ namespace Lidgren.Network
 			om.Write((byte)m_sentPingNumber); // truncating to 0-255
 			om.m_messageType = NetMessageType.Ping;
 
-			int len = om.Encode(m_peer.m_sendBuffer, 0, 0);
+			int len = om.Encode(m_peer.m_sendBuffer, 0, m_connectionId, 0);
 			bool connectionReset;
 			m_peer.SendPacket(len, m_remoteEndPoint, 1, out connectionReset);
 
@@ -78,7 +78,7 @@ namespace Lidgren.Network
 			om.Write((float)NetTime.Now); // we should update this value to reflect the exact point in time the packet is SENT
 			om.m_messageType = NetMessageType.Pong;
 
-			int len = om.Encode(m_peer.m_sendBuffer, 0, 0);
+			int len = om.Encode(m_peer.m_sendBuffer, 0, m_connectionId, 0);
 			bool connectionReset;
 
 			m_peer.SendPacket(len, m_remoteEndPoint, 1, out connectionReset);

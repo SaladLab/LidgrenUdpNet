@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="BitVectorTest.cs" />
     <Compile Include="CommunicateTest.cs" />
+    <Compile Include="ConnectionIdTest.cs" />
     <Compile Include="EncryptionTest.cs" />
     <Compile Include="MiscTest.cs" />
     <Compile Include="NetQueueTest.cs" />

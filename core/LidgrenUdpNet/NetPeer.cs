@@ -21,7 +21,7 @@ namespace Lidgren.Network
 		private object m_messageReceivedEventCreationLock = new object();
 
 		internal readonly List<NetConnection> m_connections;
-		private readonly Dictionary<NetEndPoint, NetConnection> m_connectionLookup;
+		private readonly Dictionary<long, NetConnection> m_connectionLookup;
 
 		private string m_shutdownReason;
 
@@ -119,8 +119,8 @@ namespace Lidgren.Network
 			m_releasedIncomingMessages = new NetQueue<NetIncomingMessage>(4);
 			m_unsentUnconnectedMessages = new NetQueue<NetTuple<NetEndPoint, NetOutgoingMessage>>(2);
 			m_connections = new List<NetConnection>();
-			m_connectionLookup = new Dictionary<NetEndPoint, NetConnection>();
-			m_handshakes = new Dictionary<NetEndPoint, NetConnection>();
+			m_connectionLookup = new Dictionary<long, NetConnection>();
+			m_handshakes = new Dictionary<long, NetConnection>();
 			m_senderRemote = (EndPoint)new NetEndPoint(IPAddress.Any, 0);
 			m_status = NetPeerStatus.NotRunning;
 			m_receivedFragmentGroups = new Dictionary<NetConnection, Dictionary<int, ReceivedFragmentGroup>>();
@@ -164,15 +164,15 @@ namespace Lidgren.Network
 		}
 
 		/// <summary>
-		/// Get the connection, if any, for a certain remote endpoint
+		/// Get the connection, if any, for a certain connection id
 		/// </summary>
-		public NetConnection GetConnection(NetEndPoint ep)
+		public NetConnection GetConnection(long connectionId)
 		{
 			NetConnection retval;
 
 			// this should not pose a threading problem, m_connectionLookup is never added to concurrently
 			// and TryGetValue will not throw an exception on fail, only yield null, which is acceptable
-			m_connectionLookup.TryGetValue(ep, out retval);
+			m_connectionLookup.TryGetValue(connectionId, out retval);
 
 			return retval;
 		}
@@ -250,13 +250,13 @@ namespace Lidgren.Network
 		}
 
 		// send message immediately and recycle it
-		internal void SendLibrary(NetOutgoingMessage msg, NetEndPoint recipient)
+		internal void SendLibrary(long connectionId, NetOutgoingMessage msg, NetEndPoint recipient)
 		{
 			VerifyNetworkThread();
 			NetException.Assert(msg.m_isSent == false);
 
 			bool connReset;
-			int len = msg.Encode(m_sendBuffer, 0, 0);
+			int len = msg.Encode(m_sendBuffer, 0, connectionId, 0);
 			SendPacket(len, recipient, 1, out connReset);
 
 			// no reliability, no multiple recipients - we can just recycle this message immediately
@@ -309,32 +309,12 @@ namespace Lidgren.Network
 				if (m_status == NetPeerStatus.NotRunning)
 					throw new NetException("Must call Start() first");
 
-				if (m_connectionLookup.ContainsKey(remoteEndPoint))
-					throw new NetException("Already connected to that endpoint!");
+				// make unique connection id
+				var connectionId = NetUtility.MakeConnectionId();
+				while (m_handshakes.ContainsKey(connectionId))
+					connectionId = NetUtility.MakeConnectionId();
 
-				NetConnection hs;
-				if (m_handshakes.TryGetValue(remoteEndPoint, out hs))
-				{
-					// already trying to connect to that endpoint; make another try
-					switch (hs.m_status)
-					{
-						case NetConnectionStatus.InitiatedConnect:
-							// send another connect
-							hs.m_connectRequested = true;
-							break;
-						case NetConnectionStatus.RespondedConnect:
-							// send another response
-							hs.SendConnectResponse(NetTime.Now, false);
-							break;
-						default:
-							// weird
-							LogWarning("Weird situation; Connect() already in progress to remote endpoint; but hs status is " + hs.m_status);
-							break;
-					}
-					return hs;
-				}
-
-				NetConnection conn = new NetConnection(this, remoteEndPoint);
+				NetConnection conn = new NetConnection(this, remoteEndPoint, connectionId);
 				conn.m_status = NetConnectionStatus.InitiatedConnect;
 				conn.m_localHailMessage = hailMessage;
 
@@ -342,7 +322,7 @@ namespace Lidgren.Network
 				conn.m_connectRequested = true;
 				conn.m_connectionInitiator = true;
 
-				m_handshakes.Add(remoteEndPoint, conn);
+				m_handshakes.Add(conn.m_connectionId, conn);
 
 				return conn;
 			}

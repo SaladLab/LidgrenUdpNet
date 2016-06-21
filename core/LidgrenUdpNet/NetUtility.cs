@@ -465,5 +465,26 @@ namespace Lidgren.Network
 			// this is defined in the platform specific files
 			return ComputeSHAHash(bytes, 0, bytes.Length);
 		}
+
+		private static int s_lastConnectionSeed = new Random().Next();
+
+		// create non-zero unique 64 bits id
+		public static long MakeConnectionId()
+		{
+			while (true)
+			{
+				s_lastConnectionSeed += 1;
+
+				byte[] guidBytes = Guid.NewGuid().ToByteArray();
+				byte[] randBytes = BitConverter.GetBytes(s_lastConnectionSeed);
+				byte[] combined = new byte[guidBytes.Length + randBytes.Length];
+				Array.Copy(guidBytes, 0, combined, 0, guidBytes.Length);
+				Array.Copy(randBytes, 0, combined, guidBytes.Length, randBytes.Length);
+
+				var id = BitConverter.ToInt64(ComputeSHAHash(combined), 0);
+				if (id != 0)
+					return id;
+			}
+		}
 	}
 }

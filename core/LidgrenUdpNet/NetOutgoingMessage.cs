@@ -57,15 +57,23 @@ namespace Lidgren.Network
 			m_fragmentGroup = 0;
 		}
 
-		internal int Encode(byte[] intoBuffer, int ptr, int sequenceNumber)
+		internal int Encode(byte[] intoBuffer, int ptr, long connectionId, int sequenceNumber)
 		{
 			//  8 bits - NetMessageType
+			// 64 bits - Connection ID
 			//  1 bit  - Fragment?
 			// 15 bits - Sequence number
 			// 16 bits - Payload length in bits
 
 			intoBuffer[ptr++] = (byte)m_messageType;
-
+			intoBuffer[ptr++] = (byte)((connectionId >> 56) & 0xFF);
+			intoBuffer[ptr++] = (byte)((connectionId >> 48) & 0xFF);
+			intoBuffer[ptr++] = (byte)((connectionId >> 40) & 0xFF);
+			intoBuffer[ptr++] = (byte)((connectionId >> 32) & 0xFF);
+			intoBuffer[ptr++] = (byte)((connectionId >> 24) & 0xFF);
+			intoBuffer[ptr++] = (byte)((connectionId >> 16) & 0xFF);
+			intoBuffer[ptr++] = (byte)((connectionId >> 8) & 0xFF);
+			intoBuffer[ptr++] = (byte)((connectionId) & 0xFF);
 			byte low = (byte)((sequenceNumber << 1) | (m_fragmentGroup == 0 ? 0 : 1));
 			intoBuffer[ptr++] = low;
 			intoBuffer[ptr++] = (byte)(sequenceNumber >> 7);

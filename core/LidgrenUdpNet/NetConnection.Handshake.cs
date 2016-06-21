@@ -122,7 +122,7 @@ namespace Lidgren.Network
 
 			// in case we're still in handshake
 			lock (m_peer.m_handshakes)
-				m_peer.m_handshakes.Remove(m_remoteEndPoint);
+				m_peer.m_handshakes.Remove(m_connectionId);
 
 			m_disconnectRequested = false;
 			m_connectRequested = false;
@@ -144,7 +144,7 @@ namespace Lidgren.Network
 
 			WriteLocalHail(om);
 
-			m_peer.SendLibrary(om, m_remoteEndPoint);
+			m_peer.SendLibrary(m_connectionId, om, m_remoteEndPoint);
 
 			m_connectRequested = false;
 			m_lastHandshakeSendTime = now;
@@ -169,7 +169,7 @@ namespace Lidgren.Network
 			WriteLocalHail(om);
 
 			if (onLibraryThread)
-				m_peer.SendLibrary(om, m_remoteEndPoint);
+				m_peer.SendLibrary(m_connectionId, om, m_remoteEndPoint);
 			else
 				m_peer.m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, NetOutgoingMessage>(m_remoteEndPoint, om));
 
@@ -191,7 +191,7 @@ namespace Lidgren.Network
 			om.m_messageType = NetMessageType.Disconnect;
 			Interlocked.Increment(ref om.m_recyclingCount);
 			if (onLibraryThread)
-				m_peer.SendLibrary(om, m_remoteEndPoint);
+				m_peer.SendLibrary(m_connectionId, om, m_remoteEndPoint);
 			else
 				m_peer.m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, NetOutgoingMessage>(m_remoteEndPoint, om));
 		}
@@ -215,13 +215,13 @@ namespace Lidgren.Network
 			NetOutgoingMessage om = m_peer.CreateMessage(4);
 			om.m_messageType = NetMessageType.ConnectionEstablished;
 			om.Write((float)NetTime.Now);
-			m_peer.SendLibrary(om, m_remoteEndPoint);
+			m_peer.SendLibrary(m_connectionId, om, m_remoteEndPoint);
 
 			m_handshakeAttempts = 0;
 
 			InitializePing();
 			if (m_status != NetConnectionStatus.Connected)
-				SetStatus(NetConnectionStatus.Connected, "Connected to " + NetUtility.ToHexString(m_remoteUniqueIdentifier));
+				SetStatus(NetConnectionStatus.Connected, "Connected to " + NetUtility.ToHexString(m_remoteUniqueIdentifier) + " with " + NetUtility.ToHexString(m_connectionId));
 		}
 
 		/// <summary>
@@ -276,7 +276,7 @@ namespace Lidgren.Network
 
 			// remove from handshakes
 			lock (m_peer.m_handshakes)
-				m_peer.m_handshakes.Remove(m_remoteEndPoint);
+				m_peer.m_handshakes.Remove(m_connectionId);
 		}
 
 		internal void ReceivedHandshake(double now, NetMessageType tp, int ptr, int payloadLength)
@@ -363,7 +363,7 @@ namespace Lidgren.Network
 
 							m_peer.AcceptConnection(this);
 							InitializePing();
-							SetStatus(NetConnectionStatus.Connected, "Connected to " + NetUtility.ToHexString(m_remoteUniqueIdentifier));
+							SetStatus(NetConnectionStatus.Connected, "Connected to " + NetUtility.ToHexString(m_remoteUniqueIdentifier) + " with " + NetUtility.ToHexString(m_connectionId));
 							return;
 					}
 					break;

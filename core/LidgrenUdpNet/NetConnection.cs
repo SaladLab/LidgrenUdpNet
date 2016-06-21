@@ -12,7 +12,7 @@ namespace Lidgren.Network
 	/// <summary>
 	/// Represents a connection to a remote peer
 	/// </summary>
-	[DebuggerDisplay("RemoteUniqueIdentifier={RemoteUniqueIdentifier} RemoteEndPoint={m_remoteEndPoint}")]
+	[DebuggerDisplay("RemoteUniqueIdentifier={RemoteUniqueIdentifier} RemoteEndPoint={m_remoteEndPoint} ConnectionId={m_connectionId}")]
 	public partial class NetConnection
 	{
 		private const int m_infrequentEventsSkipFrames = 8; // number of heartbeats to skip checking for infrequent events (ping, timeout etc)
@@ -24,6 +24,7 @@ namespace Lidgren.Network
 		internal NetConnectionStatus m_outputtedStatus; // status that has been sent as StatusChanged message
 		internal NetConnectionStatus m_visibleStatus; // status visible by querying the Status property
 		internal NetEndPoint m_remoteEndPoint;
+		internal long m_connectionId;
 		internal NetSenderChannelBase[] m_sendChannels;
 		internal NetReceiverChannelBase[] m_receiveChannels;
 		internal NetOutgoingMessage m_localHailMessage;
@@ -76,6 +77,11 @@ namespace Lidgren.Network
 		public NetEndPoint RemoteEndPoint { get { return m_remoteEndPoint; } }
 
 		/// <summary>
+		/// Gets the identifier for the connection
+		/// </summary>
+		public long ConnectionId { get { return m_connectionId; } }
+
+		/// <summary>
 		/// Gets the unique identifier of the remote NetPeer for this connection
 		/// </summary>
 		public long RemoteUniqueIdentifier { get { return m_remoteUniqueIdentifier; } }
@@ -94,7 +100,7 @@ namespace Lidgren.Network
 			return 0.025 + (avgRtt * 2.1); // 25 ms + double rtt
 		}
 
-		internal NetConnection(NetPeer peer, NetEndPoint remoteEndPoint)
+		internal NetConnection(NetPeer peer, NetEndPoint remoteEndPoint, long connectionId)
 		{
 			m_peer = peer;
 			m_peerConfiguration = m_peer.Configuration;
@@ -102,6 +108,7 @@ namespace Lidgren.Network
 			m_outputtedStatus = NetConnectionStatus.None;
 			m_visibleStatus = NetConnectionStatus.None;
 			m_remoteEndPoint = remoteEndPoint;
+			m_connectionId = connectionId;
 			m_sendChannels = new NetSenderChannelBase[NetConstants.NumTotalChannels];
 			m_receiveChannels = new NetReceiverChannelBase[NetConstants.NumTotalChannels];
 			m_queuedOutgoingAcks = new NetQueue<NetTuple<NetMessageType, int>>(4);
@@ -220,6 +227,14 @@ namespace Lidgren.Network
 
 					// write acks header
 					sendBuffer[m_sendBufferWritePtr++] = (byte)NetMessageType.Acknowledge;
+					sendBuffer[m_sendBufferWritePtr++] = (byte)((m_connectionId >> 56) & 0xFF);
+					sendBuffer[m_sendBufferWritePtr++] = (byte)((m_connectionId >> 48) & 0xFF);
+					sendBuffer[m_sendBufferWritePtr++] = (byte)((m_connectionId >> 40) & 0xFF);
+					sendBuffer[m_sendBufferWritePtr++] = (byte)((m_connectionId >> 32) & 0xFF);
+					sendBuffer[m_sendBufferWritePtr++] = (byte)((m_connectionId >> 24) & 0xFF);
+					sendBuffer[m_sendBufferWritePtr++] = (byte)((m_connectionId >> 16) & 0xFF);
+					sendBuffer[m_sendBufferWritePtr++] = (byte)((m_connectionId >> 8) & 0xFF);
+					sendBuffer[m_sendBufferWritePtr++] = (byte)((m_connectionId) & 0xFF);
 					sendBuffer[m_sendBufferWritePtr++] = 0; // no sequence number
 					sendBuffer[m_sendBufferWritePtr++] = 0; // no sequence number
 					int len = (acks * 3) * 8; // bits
@@ -326,7 +341,7 @@ namespace Lidgren.Network
 			}
 
 			// encode it into buffer regardless if it (now) fits within MTU or not
-			m_sendBufferWritePtr = om.Encode(m_peer.m_sendBuffer, m_sendBufferWritePtr, seqNr);
+			m_sendBufferWritePtr = om.Encode(m_peer.m_sendBuffer, m_sendBufferWritePtr, m_connectionId, seqNr);
 			m_sendBufferNumMessages++;
 
 			if (m_sendBufferWritePtr > m_currentMTU)

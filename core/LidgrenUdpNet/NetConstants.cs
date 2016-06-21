@@ -31,7 +31,7 @@ namespace Lidgren.Network
 
 		internal const int NumSequenceNumbers = 1024;
 
-		internal const int HeaderByteSize = 5;
+		internal const int HeaderByteSize = 5 + 8;
 
 		internal const int UnreliableWindowSize = 128;
 		internal const int ReliableOrderedWindowSize = 64;
@@ -40,7 +40,7 @@ namespace Lidgren.Network
 
 		internal const int MaxFragmentationGroups = ushort.MaxValue - 1;
 
-		internal const int UnfragmentedMessageHeaderSize = 5;
+		internal const int UnfragmentedMessageHeaderSize = 5 + 8;
 
 		/// <summary>
 		/// Number of channels which needs a sequence number to work

@@ -107,7 +107,7 @@ namespace Lidgren.Network
 			byte[] tmp = new byte[size];
 			om.Write(tmp);
 			om.m_messageType = NetMessageType.ExpandMTURequest;
-			int len = om.Encode(m_peer.m_sendBuffer, 0, 0);
+			int len = om.Encode(m_peer.m_sendBuffer, 0, m_connectionId, 0);
 
 			bool ok = m_peer.SendMTUPacket(len, m_remoteEndPoint);
 			if (ok == false)
@@ -152,7 +152,7 @@ namespace Lidgren.Network
 			NetOutgoingMessage om = m_peer.CreateMessage(4);
 			om.Write(size);
 			om.m_messageType = NetMessageType.ExpandMTUSuccess;
-			int len = om.Encode(m_peer.m_sendBuffer, 0, 0);
+			int len = om.Encode(m_peer.m_sendBuffer, 0, m_connectionId, 0);
 			bool connectionReset;
 			m_peer.SendPacket(len, m_remoteEndPoint, 1, out connectionReset);
 			m_peer.Recycle(om);
