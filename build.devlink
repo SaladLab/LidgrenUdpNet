@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<packages>
+    <package id="LidgrenUdpNet">
+        <files dir="lib/net45" source="core/LidgrenUdpNet/bin/Debug"/>
+        <files dir="lib/net35" source="core/LidgrenUdpNet.Net35/bin/Debug"/>
+    </package>
+</packages>
