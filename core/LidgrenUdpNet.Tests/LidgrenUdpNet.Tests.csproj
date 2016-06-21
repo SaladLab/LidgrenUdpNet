@@ -61,11 +61,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitVectorTest.cs" />
+    <Compile Include="CommunicateTest.cs" />
     <Compile Include="EncryptionTest.cs" />
     <Compile Include="MiscTest.cs" />
     <Compile Include="NetQueueTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadWriteTest.cs" />
+    <Compile Include="TestSimpleClient.cs" />
+    <Compile Include="TestSimpleServer.cs" />
     <Compile Include="TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
