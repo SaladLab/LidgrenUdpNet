@@ -210,7 +210,7 @@ namespace Lidgren.Network
 				//
 				while (m_queuedOutgoingAcks.Count > 0)
 				{
-					int acks = (mtu - (m_sendBufferWritePtr + 5)) / 3; // 3 bytes per actual ack
+					int acks = (mtu - (m_sendBufferWritePtr + NetConstants.HeaderByteSize)) / 3; // 3 bytes per actual ack
 					if (acks > m_queuedOutgoingAcks.Count)
 						acks = m_queuedOutgoingAcks.Count;
 
