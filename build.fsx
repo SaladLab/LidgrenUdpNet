@@ -20,6 +20,10 @@ Target "Restore" <| fun _ -> restoreNugetPackages solution
 
 Target "Build" <| fun _ -> buildSolution solution
 
+Target "Test" <| fun _ -> testSolution solution
+
+Target "Cover" <| fun _ -> coverSolution solution
+
 Target "PackNuget" <| fun _ -> createNugetPackages solution
 
 Target "PackUnity" <| fun _ ->
@@ -52,6 +56,8 @@ let isPublishOnly = getBuildParam "publishonly"
 "PublishNuget" ==> "Publish"
 "PublishUnity" ==> "Publish"
 
+"Test" ==> "CI"
+"Cover" ==> "CI"
 "Publish" ==> "CI"
 
 RunTargetOrDefault "Help"
