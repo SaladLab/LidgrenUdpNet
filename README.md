@@ -8,3 +8,4 @@ Modified version of [lidgren-network-gen3](https://github.com/lidgren/lidgren-ne
 - Support .NET 3.5 in the nuget package.
 - Support UnityPackage.
 - Add NetConnection.MessageHandler to handle incoming messages quickly.
+- Add Connection ID to handle change of peer address under mobile environment.
