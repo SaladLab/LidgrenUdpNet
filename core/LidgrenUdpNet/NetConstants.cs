@@ -51,7 +51,7 @@ namespace Lidgren.Network
 		/// Number of reliable channels
 		/// </summary>
 		internal const int NumReliableChannels = ((int)NetMessageType.UserReliableOrdered1 + NetConstants.NetChannelsPerDeliveryMethod) - (int)NetMessageType.UserReliableUnordered;
-		
+
 		internal const string ConnResetMessage = "Connection was reset by remote host";
 	}
 }

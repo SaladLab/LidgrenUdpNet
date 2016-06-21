@@ -288,7 +288,7 @@ namespace Lidgren.Network
 				m_sendBufferNumMessages = 0;
 			}
 		}
-		
+
 		// Queue an item for immediate sending on the wire
 		// This method is called from the ISenderChannels
 		internal void QueueSendMessage(NetOutgoingMessage om, int seqNr)
@@ -442,7 +442,7 @@ namespace Lidgren.Network
 					//ExecuteDisconnect(msg.ReadString(), false);
 					break;
 				case NetMessageType.Acknowledge:
-					for (int i = 0; i < payloadLength; i+=3)
+					for (int i = 0; i < payloadLength; i += 3)
 					{
 						NetMessageType acktp = (NetMessageType)m_peer.m_receiveBuffer[ptr++]; // netmessagetype
 						int seqNr = m_peer.m_receiveBuffer[ptr++];

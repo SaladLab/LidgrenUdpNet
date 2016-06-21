@@ -55,7 +55,7 @@ namespace Lidgren.Network
 		/// </summary>
 		public static void ResolveAsync(string ipOrHost, int port, ResolveEndPointCallback callback)
 		{
-			ResolveAsync(ipOrHost, delegate(NetAddress adr)
+			ResolveAsync(ipOrHost, delegate (NetAddress adr)
 			{
 				if (adr == null)
 				{
@@ -110,7 +110,7 @@ namespace Lidgren.Network
 			IPHostEntry entry;
 			try
 			{
-				Dns.BeginGetHostEntry(ipOrHost, delegate(IAsyncResult result)
+				Dns.BeginGetHostEntry(ipOrHost, delegate (IAsyncResult result)
 				{
 					try
 					{
@@ -240,7 +240,7 @@ namespace Lidgren.Network
 			}
 			return new string(c);
 		}
-	
+
 		/// <summary>
 		/// Returns true if the endpoint supplied is on the same subnet as this host
 		/// </summary>
@@ -451,7 +451,7 @@ namespace Lidgren.Network
 		{
 			var cnt = list.Count;
 			StringBuilder bdr = new StringBuilder(cnt * 5); // educated guess
-			for(int i=0;i<cnt;i++)
+			for (int i = 0; i < cnt; i++)
 			{
 				bdr.Append(list[i].ToString());
 				if (i != cnt - 1)

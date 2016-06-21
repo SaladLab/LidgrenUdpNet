@@ -41,7 +41,7 @@ namespace Lidgren.Network
 
 		internal int m_fragmentGroup;             // which group of fragments ths belongs to
 		internal int m_fragmentGroupTotalBits;    // total number of bits in this group
-		internal int m_fragmentChunkByteSize;	  // size, in bytes, of every chunk but the last one
+		internal int m_fragmentChunkByteSize;     // size, in bytes, of every chunk but the last one
 		internal int m_fragmentChunkNumber;       // which number chunk this is, starting with 0
 
 		internal NetOutgoingMessage()
@@ -63,7 +63,7 @@ namespace Lidgren.Network
 			//  1 bit  - Fragment?
 			// 15 bits - Sequence number
 			// 16 bits - Payload length in bits
-			
+
 			intoBuffer[ptr++] = (byte)m_messageType;
 
 			byte low = (byte)((sequenceNumber << 1) | (m_fragmentGroup == 0 ? 0 : 1));

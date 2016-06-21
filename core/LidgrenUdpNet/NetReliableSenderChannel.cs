@@ -166,8 +166,8 @@ namespace Lidgren.Network
 			if (storedMessage != null)
 			{
 #endif
-			if (storedMessage.m_recyclingCount <= 0)
-				m_connection.m_peer.Recycle(storedMessage);
+				if (storedMessage.m_recyclingCount <= 0)
+					m_connection.m_peer.Recycle(storedMessage);
 
 #if !DEBUG
 			}

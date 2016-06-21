@@ -69,7 +69,7 @@ namespace Lidgren.Network
 		{
 			get { return (int)(m_readPosition / 8); }
 		}
-		
+
 		static NetBuffer()
 		{
 			s_readMethods = new Dictionary<Type, MethodInfo>();

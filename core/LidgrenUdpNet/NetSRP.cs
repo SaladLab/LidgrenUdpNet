@@ -14,7 +14,7 @@ namespace Lidgren.Network
 		private static readonly NetBigInteger N = new NetBigInteger("0115b8b692e0e045692cf280b436735c77a5a9e8a9e7ed56c965f87db5b2a2ece3", 16);
 		private static readonly NetBigInteger g = NetBigInteger.Two;
 		private static readonly NetBigInteger k = ComputeMultiplier();
-		
+
 		/// <summary>
 		/// Compute multiplier (k)
 		/// </summary>
@@ -84,7 +84,7 @@ namespace Lidgren.Network
 		/// </summary>
 		public static byte[] ComputeClientEphemeral(byte[] clientPrivateEphemeral) // a
 		{
-			// A= g^a (mod N) 
+			// A= g^a (mod N)
 			NetBigInteger a = new NetBigInteger(NetUtility.ToHexString(clientPrivateEphemeral), 16);
 			NetBigInteger retval = g.ModPow(a, N);
 
@@ -99,7 +99,7 @@ namespace Lidgren.Network
 			var b = new NetBigInteger(NetUtility.ToHexString(serverPrivateEphemeral), 16);
 			var v = new NetBigInteger(NetUtility.ToHexString(verifier), 16);
 
-			// B = kv + g^b (mod N) 
+			// B = kv + g^b (mod N)
 			var bb = g.ModPow(b, N);
 			var kv = v.Multiply(k);
 			var B = (kv.Add(bb)).Mod(N);
@@ -145,7 +145,7 @@ namespace Lidgren.Network
 		/// <summary>
 		/// Computes the client session value
 		/// </summary>
-		public static byte[] ComputeClientSessionValue(byte[] serverPublicEphemeral, byte[] xdata,  byte[] udata, byte[] clientPrivateEphemeral)
+		public static byte[] ComputeClientSessionValue(byte[] serverPublicEphemeral, byte[] xdata, byte[] udata, byte[] clientPrivateEphemeral)
 		{
 			// (B - kg^x) ^ (a + ux)   (mod N)
 			var B = new NetBigInteger(NetUtility.ToHexString(serverPublicEphemeral), 16);
@@ -164,9 +164,9 @@ namespace Lidgren.Network
 		public static NetXtea CreateEncryption(NetPeer peer, byte[] sessionValue)
 		{
 			var hash = NetUtility.ComputeSHAHash(sessionValue);
-			
+
 			var key = new byte[16];
-			for(int i=0;i<16;i++)
+			for (int i = 0; i < 16; i++)
 			{
 				key[i] = hash[i];
 				for (int j = 1; j < hash.Length / 16; j++)

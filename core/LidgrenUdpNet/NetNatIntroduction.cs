@@ -9,7 +9,8 @@ using NetEndPoint = System.Net.IPEndPoint;
 
 namespace Lidgren.Network
 {
-	public partial class NetPeer {
+	public partial class NetPeer
+	{
 		private const byte HostByte = 1;
 		private const byte ClientByte = 0;
 
@@ -157,6 +158,6 @@ namespace Lidgren.Network
 			punchSuccess.m_senderEndPoint = senderEndPoint;
 			punchSuccess.Write(token);
 			ReleaseMessage(punchSuccess);
-	    }
+		}
 	}
 }

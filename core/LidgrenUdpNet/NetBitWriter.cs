@@ -247,7 +247,7 @@ namespace Lidgren.Network
 				}
 			}
 #else
-		
+
 		public static uint ReadUInt32(byte[] fromBuffer, int numberOfBits, int readBitOffset)
 		{
 			NetException.Assert(((numberOfBits > 0) && (numberOfBits <= 32)), "ReadUInt32() can only read between 1 and 32 bits");

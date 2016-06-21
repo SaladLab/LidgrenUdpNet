@@ -111,9 +111,9 @@ namespace Lidgren.Network
 		/// </summary>
 		public override int Next(int minValue, int maxValue)
 		{
-            return minValue + (int)(NextDouble() * (double)(maxValue - minValue));
+			return minValue + (int)(NextDouble() * (double)(maxValue - minValue));
 		}
-		
+
 		/// <summary>
 		/// Generates a random value between UInt64.MinValue to UInt64.MaxValue
 		/// </summary>
@@ -143,7 +143,7 @@ namespace Lidgren.Network
 			m_nextBoolIndex++;
 			return retval;
 		}
-		
+
 
 		/// <summary>
 		/// Fills all bytes from offset to offset + length in buffer with random values

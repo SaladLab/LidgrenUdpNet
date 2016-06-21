@@ -41,11 +41,11 @@ namespace Lidgren.Network
 		//
 		// [0] item
 		// [1] item (tail = ((head + size - 1) % capacity)
-		// [2] 
-		// [3] 
+		// [2]
+		// [3]
 		// [4] item (head)
 		// [5] item
-		// [6] item 
+		// [6] item
 		// [7] item
 		//
 		private T[] m_items;
@@ -56,7 +56,8 @@ namespace Lidgren.Network
 		/// <summary>
 		/// Gets the number of items in the queue
 		/// </summary>
-		public int Count {
+		public int Count
+		{
 			get
 			{
 				m_lock.EnterReadLock();

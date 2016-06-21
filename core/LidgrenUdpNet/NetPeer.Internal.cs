@@ -69,7 +69,7 @@ namespace Lidgren.Network
 				return;
 
 			// remove all callbacks regardless of sync context
-            m_receiveCallbacks.RemoveAll(tuple => tuple.Item2.Equals(callback));
+			m_receiveCallbacks.RemoveAll(tuple => tuple.Item2.Equals(callback));
 
 			if (m_receiveCallbacks.Count < 1)
 				m_receiveCallbacks = null;
@@ -255,7 +255,7 @@ namespace Lidgren.Network
 						{
 							m_socket.Shutdown(SocketShutdown.Receive);
 						}
-						catch(Exception ex)
+						catch (Exception ex)
 						{
 							LogDebug("Socket.Shutdown exception: " + ex.ToString());
 						}
@@ -382,8 +382,8 @@ namespace Lidgren.Network
 				}
 			}
 
-            if (m_upnp != null)
-                m_upnp.CheckForDiscoveryTimeout();
+			if (m_upnp != null)
+				m_upnp.CheckForDiscoveryTimeout();
 
 			//
 			// read from socket

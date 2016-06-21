@@ -95,7 +95,7 @@ namespace Lidgren.Network
 
 			return;
 		}
-		
+
 		// remoteWindowStart is remote expected sequence number; everything below this has arrived properly
 		// seqNr is the actual nr received
 		internal override void ReceiveAcknowledge(double now, int seqNr)

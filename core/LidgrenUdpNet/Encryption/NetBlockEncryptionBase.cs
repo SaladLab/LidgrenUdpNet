@@ -39,7 +39,7 @@ namespace Lidgren.Network
 			msg.EnsureBufferSize(dstSize * 8 + (4 * 8)); // add 4 bytes for payload length at end
 			msg.LengthBits = dstSize * 8; // length will automatically adjust +4 bytes when payload length is written
 
-			for(int i=0;i<numBlocks;i++)
+			for (int i = 0; i < numBlocks; i++)
 			{
 				EncryptBlock(msg.m_data, (i * blockSize), m_tmp);
 				Buffer.BlockCopy(m_tmp, 0, msg.m_data, (i * blockSize), m_tmp.Length);

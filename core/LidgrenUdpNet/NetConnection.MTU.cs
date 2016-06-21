@@ -2,7 +2,7 @@
 
 namespace Lidgren.Network
 {
-	public partial class NetConnection  
+	public partial class NetConnection
 	{
 		private enum ExpandMTUStatus
 		{

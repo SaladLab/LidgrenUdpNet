@@ -82,13 +82,13 @@ namespace Lidgren.Network
 			peer.Socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, false);
 		}
 
-	    internal void CheckForDiscoveryTimeout()
-	    {
-	        if ((m_status != UPnPStatus.Discovering) || (NetTime.Now < m_discoveryResponseDeadline))
-                return;
-	        m_peer.LogDebug("UPnP discovery timed out");
-	        m_status = UPnPStatus.NotAvailable;
-	    }
+		internal void CheckForDiscoveryTimeout()
+		{
+			if ((m_status != UPnPStatus.Discovering) || (NetTime.Now < m_discoveryResponseDeadline))
+				return;
+			m_peer.LogDebug("UPnP discovery timed out");
+			m_status = UPnPStatus.NotAvailable;
+		}
 
 		internal void ExtractServiceUrl(string resp)
 		{
@@ -96,31 +96,31 @@ namespace Lidgren.Network
 			try
 			{
 #endif
-			XmlDocument desc = new XmlDocument();
-			using (var response = WebRequest.Create(resp).GetResponse())
-				desc.Load(response.GetResponseStream());
+				XmlDocument desc = new XmlDocument();
+				using (var response = WebRequest.Create(resp).GetResponse())
+					desc.Load(response.GetResponseStream());
 
-			XmlNamespaceManager nsMgr = new XmlNamespaceManager(desc.NameTable);
-			nsMgr.AddNamespace("tns", "urn:schemas-upnp-org:device-1-0");
-			XmlNode typen = desc.SelectSingleNode("//tns:device/tns:deviceType/text()", nsMgr);
-			if (!typen.Value.Contains("InternetGatewayDevice"))
-				return;
-
-			m_serviceName = "WANIPConnection";
-			XmlNode node = desc.SelectSingleNode("//tns:service[tns:serviceType=\"urn:schemas-upnp-org:service:" + m_serviceName + ":1\"]/tns:controlURL/text()", nsMgr);
-			if (node == null)
-			{
-				//try another service name
-				m_serviceName = "WANPPPConnection";
-				node = desc.SelectSingleNode("//tns:service[tns:serviceType=\"urn:schemas-upnp-org:service:" + m_serviceName + ":1\"]/tns:controlURL/text()", nsMgr);
-				if (node == null)
+				XmlNamespaceManager nsMgr = new XmlNamespaceManager(desc.NameTable);
+				nsMgr.AddNamespace("tns", "urn:schemas-upnp-org:device-1-0");
+				XmlNode typen = desc.SelectSingleNode("//tns:device/tns:deviceType/text()", nsMgr);
+				if (!typen.Value.Contains("InternetGatewayDevice"))
 					return;
-			}
 
-			m_serviceUrl = CombineUrls(resp, node.Value);
-			m_peer.LogDebug("UPnP service ready");
-			m_status = UPnPStatus.Available;
-			m_discoveryComplete.Set();
+				m_serviceName = "WANIPConnection";
+				XmlNode node = desc.SelectSingleNode("//tns:service[tns:serviceType=\"urn:schemas-upnp-org:service:" + m_serviceName + ":1\"]/tns:controlURL/text()", nsMgr);
+				if (node == null)
+				{
+					//try another service name
+					m_serviceName = "WANPPPConnection";
+					node = desc.SelectSingleNode("//tns:service[tns:serviceType=\"urn:schemas-upnp-org:service:" + m_serviceName + ":1\"]/tns:controlURL/text()", nsMgr);
+					if (node == null)
+						return;
+				}
+
+				m_serviceUrl = CombineUrls(resp, node.Value);
+				m_peer.LogDebug("UPnP service ready");
+				m_status = UPnPStatus.Available;
+				m_discoveryComplete.Set();
 #if !DEBUG
 			}
 			catch
@@ -261,11 +261,12 @@ namespace Lidgren.Network
 			WebRequest r = HttpWebRequest.Create(url);
 			r.Method = "POST";
 			byte[] b = System.Text.Encoding.UTF8.GetBytes(req);
-			r.Headers.Add("SOAPACTION", "\"urn:schemas-upnp-org:service:" + m_serviceName + ":1#" + function + "\""); 
+			r.Headers.Add("SOAPACTION", "\"urn:schemas-upnp-org:service:" + m_serviceName + ":1#" + function + "\"");
 			r.ContentType = "text/xml; charset=\"utf-8\"";
 			r.ContentLength = b.Length;
 			r.GetRequestStream().Write(b, 0, b.Length);
-			using (WebResponse wres = r.GetResponse()) {
+			using (WebResponse wres = r.GetResponse())
+			{
 				XmlDocument resp = new XmlDocument();
 				Stream ress = wres.GetResponseStream();
 				resp.Load(ress);

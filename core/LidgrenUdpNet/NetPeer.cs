@@ -32,8 +32,8 @@ namespace Lidgren.Network
 
 		/// <summary>
 		/// Signalling event which can be waited on to determine when a message is queued for reading.
-		/// Note that there is no guarantee that after the event is signaled the blocked thread will 
-		/// find the message in the queue. Other user created threads could be preempted and dequeue 
+		/// Note that there is no guarantee that after the event is signaled the blocked thread will
+		/// find the message in the queue. Other user created threads could be preempted and dequeue
 		/// the message before the waiting thread wakes up.
 		/// </summary>
 		public AutoResetEvent MessageReceivedEvent
@@ -123,7 +123,7 @@ namespace Lidgren.Network
 			m_handshakes = new Dictionary<NetEndPoint, NetConnection>();
 			m_senderRemote = (EndPoint)new NetEndPoint(IPAddress.Any, 0);
 			m_status = NetPeerStatus.NotRunning;
-			m_receivedFragmentGroups = new Dictionary<NetConnection, Dictionary<int, ReceivedFragmentGroup>>();	
+			m_receivedFragmentGroups = new Dictionary<NetConnection, Dictionary<int, ReceivedFragmentGroup>>();
 		}
 
 		/// <summary>
@@ -148,7 +148,7 @@ namespace Lidgren.Network
 			}
 
 			InitializeNetwork();
-			
+
 			// start network thread
 			m_networkThread = new Thread(new ThreadStart(NetworkLoop));
 			m_networkThread.Name = m_configuration.NetworkThreadName;
@@ -180,24 +180,24 @@ namespace Lidgren.Network
 		/// <summary>
 		/// Read a pending message from any connection, blocking up to maxMillis if needed
 		/// </summary>
-	        public NetIncomingMessage WaitMessage(int maxMillis)
-	        {
-	            NetIncomingMessage msg = ReadMessage();
-	
-	            while (msg == null)
-	            {
-	                // This could return true...
-	                if (!MessageReceivedEvent.WaitOne(maxMillis))
-	                {
-	                    return null;
-	                }
-	
-	                // ... while this will still returns null. That's why we need to cycle.
-	                msg = ReadMessage();
-	            }
-	
-	            return msg;
-        	}
+		public NetIncomingMessage WaitMessage(int maxMillis)
+		{
+			NetIncomingMessage msg = ReadMessage();
+
+			while (msg == null)
+			{
+				// This could return true...
+				if (!MessageReceivedEvent.WaitOne(maxMillis))
+				{
+					return null;
+				}
+
+				// ... while this will still returns null. That's why we need to cycle.
+				msg = ReadMessage();
+			}
+
+			return msg;
+		}
 
 		/// <summary>
 		/// Read a pending message from any connection, if any
@@ -215,17 +215,17 @@ namespace Lidgren.Network
 			}
 			return retval;
 		}
-		
-        	/// <summary>
-	        /// Reads a pending message from any connection, if any.
-	        /// Returns true if message was read, otherwise false.
-	        /// </summary>
-	        /// <returns>True, if message was read.</returns>
-	        public bool ReadMessage(out NetIncomingMessage message)
-	        {
-	            message = ReadMessage();
-	            return message != null;
-	        }
+
+		/// <summary>
+		/// Reads a pending message from any connection, if any.
+		/// Returns true if message was read, otherwise false.
+		/// </summary>
+		/// <returns>True, if message was read.</returns>
+		public bool ReadMessage(out NetIncomingMessage message)
+		{
+			message = ReadMessage();
+			return message != null;
+		}
 
 		/// <summary>
 		/// Read a pending message from any connection, if any

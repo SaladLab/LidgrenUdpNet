@@ -545,12 +545,12 @@ namespace Lidgren.Network
 
 			return result;
 		}
-	
+
 		private int calcBitLength(
 			int indx,
 			int[] mag)
 		{
-			for (; ; )
+			for (;;)
 			{
 				if (indx >= mag.Length)
 					return 0;
@@ -633,7 +633,7 @@ namespace Lidgren.Network
 			return CompareTo((NetBigInteger)obj);
 		}
 
-		
+
 		// unsigned comparison on two arrays - note the arrays may
 		// start with leading zeros.
 		private static int CompareTo(
@@ -745,7 +745,7 @@ namespace Lidgren.Network
 
 				count = new int[iCount.Length];
 
-				for (; ; )
+				for (;;)
 				{
 					if (cBitLength < xBitLength
 						|| CompareNoLeadingZeroes(xStart, x, cStart, c) >= 0)
@@ -961,7 +961,7 @@ namespace Lidgren.Network
 					: -m_magnitude[m_magnitude.Length - 1];
 			}
 		}
-	
+
 		public NetBigInteger Max(
 			NetBigInteger value)
 		{
@@ -1305,7 +1305,7 @@ namespace Lidgren.Network
 
 			int xBase = x.Length - y.Length;
 
-			for (; ; )
+			for (;;)
 			{
 				long a = z[--i] & IMASK;
 				long val = 0;
@@ -1565,7 +1565,7 @@ namespace Lidgren.Network
 			NetBigInteger y = One;
 			NetBigInteger z = this;
 
-			for (; ; )
+			for (;;)
 			{
 				if ((exp & 0x1) == 1)
 				{
@@ -1578,7 +1578,7 @@ namespace Lidgren.Network
 
 			return y;
 		}
-		
+
 		private int Remainder(
 			int m)
 		{
@@ -1637,7 +1637,7 @@ namespace Lidgren.Network
 					Array.Copy(y, yStart, c, 0, len);
 				}
 
-				for (; ; )
+				for (;;)
 				{
 					if (cBitLength < xBitLength
 						|| CompareNoLeadingZeroes(xStart, x, cStart, c) >= 0)
@@ -2334,7 +2334,7 @@ namespace Lidgren.Network
 			return ((word >> (n % 32)) & 1) > 0;
 		}
 	}
-	
+
 #if WINDOWS_RUNTIME
 	internal sealed class Stack
 	{

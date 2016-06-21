@@ -82,7 +82,7 @@ namespace Lidgren.Network
 #endif
 			}
 
-			for(int i=0;i<count;i++)
+			for (int i = 0; i < count; i++)
 			{
 				var conn = recipients[i];
 				int cmtu = conn.m_currentMTU;

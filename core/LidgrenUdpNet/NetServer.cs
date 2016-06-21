@@ -25,7 +25,8 @@ namespace Lidgren.Network
 		public void SendToAll(NetOutgoingMessage msg, NetDeliveryMethod method)
 		{
 			var all = this.Connections;
-			if (all.Count <= 0) {
+			if (all.Count <= 0)
+			{
 				if (msg.m_isSent == false)
 					Recycle(msg);
 				return;
@@ -44,7 +45,8 @@ namespace Lidgren.Network
 		public void SendToAll(NetOutgoingMessage msg, NetConnection except, NetDeliveryMethod method, int sequenceChannel)
 		{
 			var all = this.Connections;
-			if (all.Count <= 0) {
+			if (all.Count <= 0)
+			{
 				if (msg.m_isSent == false)
 					Recycle(msg);
 				return;

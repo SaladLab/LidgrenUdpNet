@@ -29,7 +29,7 @@ namespace Lidgren.Network
 		/// No connection, or attempt, in place
 		/// </summary>
 		None,
-		
+
 		/// <summary>
 		/// Connect has been sent; waiting for ConnectResponse
 		/// </summary>
@@ -53,7 +53,7 @@ namespace Lidgren.Network
 		/// <summary>
 		/// Connected
 		/// </summary>
-		Connected,		  // we received ConnectResponse (if initiator) or ConnectionEstablished (if passive)
+		Connected,        // we received ConnectResponse (if initiator) or ConnectionEstablished (if passive)
 
 		/// <summary>
 		/// In the process of disconnecting

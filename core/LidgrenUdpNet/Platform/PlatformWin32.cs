@@ -13,7 +13,7 @@ namespace Lidgren.Network
 	{
 		private static readonly long s_timeInitialized = Stopwatch.GetTimestamp();
 		private static readonly double s_dInvFreq = 1.0 / (double)Stopwatch.Frequency;
-		
+
 		[CLSCompliant(false)]
 		public static ulong GetPlatformSeed(int seedInc)
 		{
@@ -134,7 +134,7 @@ namespace Lidgren.Network
 		{
 			return new IPAddress(bytes);
 		}
-		
+
 		private static readonly SHA256 s_sha = SHA256.Create();
 		public static byte[] ComputeSHAHash(byte[] bytes, int offset, int count)
 		{
@@ -146,7 +146,7 @@ namespace Lidgren.Network
 	{
 		private static readonly long s_timeInitialized = Stopwatch.GetTimestamp();
 		private static readonly double s_dInvFreq = 1.0 / (double)Stopwatch.Frequency;
-		
+
 		/// <summary>
 		/// Get number of seconds since the application started
 		/// </summary>

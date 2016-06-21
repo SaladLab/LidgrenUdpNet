@@ -121,7 +121,7 @@ namespace Lidgren.Network
 					if (m_handshakes.Count > 0)
 					{
 						LogVerbose("Aborting connection attempt");
-						foreach(var hs in m_handshakes)
+						foreach (var hs in m_handshakes)
 							hs.Value.Disconnect(byeMessage);
 						return;
 					}
