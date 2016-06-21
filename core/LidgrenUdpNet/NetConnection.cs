@@ -33,6 +33,7 @@ namespace Lidgren.Network
 		private int m_sendBufferWritePtr;
 		private int m_sendBufferNumMessages;
 		private object m_tag;
+		private Func<NetIncomingMessage, bool> m_messageHandler;
 		internal NetConnectionStatistics m_statistics;
 
 		/// <summary>
@@ -42,6 +43,16 @@ namespace Lidgren.Network
 		{
 			get { return m_tag; }
 			set { m_tag = value; }
+		}
+
+		/// <summary>
+		/// Gets or sets the handler which handle incoming messages.
+		/// If this is set and handler returns true, then NetPeer cannot receive message event.
+		/// </summary>
+		public Func<NetIncomingMessage, bool> MessageHandler
+		{
+			get { return m_messageHandler; }
+			set { m_messageHandler = value; }
 		}
 
 		/// <summary>

@@ -85,6 +85,13 @@ namespace Lidgren.Network
 				return;
 			}
 
+			if (msg.SenderConnection != null && msg.SenderConnection.MessageHandler != null)
+			{
+				var handled = msg.SenderConnection.MessageHandler(msg);
+				if (handled)
+					return;
+			}
+
 			m_releasedIncomingMessages.Enqueue(msg);
 
 			if (m_messageReceivedEvent != null)
