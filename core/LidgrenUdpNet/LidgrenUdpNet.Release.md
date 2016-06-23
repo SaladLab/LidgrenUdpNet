@@ -1,3 +1,7 @@
+## 1.0.4 (Released 2016/06/23)
+
+* Fix missing Connection ID for unsent message.
+
 ## 1.0.3 (Released 2016/06/21)
 
 * Add Connection ID.
