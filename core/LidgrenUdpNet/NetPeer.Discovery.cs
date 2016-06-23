@@ -19,7 +19,7 @@ namespace Lidgren.Network
 			um.m_messageType = NetMessageType.Discovery;
 			Interlocked.Increment(ref um.m_recyclingCount);
 
-			m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, NetOutgoingMessage>(new NetEndPoint(NetUtility.GetBroadcastAddress(), serverPort), um));
+			m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, long, NetOutgoingMessage>(new NetEndPoint(NetUtility.GetBroadcastAddress(), serverPort), 0, um));
 		}
 
 		/// <summary>
@@ -42,7 +42,7 @@ namespace Lidgren.Network
 			NetOutgoingMessage om = CreateMessage(0);
 			om.m_messageType = NetMessageType.Discovery;
 			om.m_recyclingCount = 1;
-			m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, NetOutgoingMessage>(endPoint, om));
+			m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, long, NetOutgoingMessage>(endPoint, 0, om));
 		}
 
 		/// <summary>
@@ -63,7 +63,7 @@ namespace Lidgren.Network
 
 			msg.m_messageType = NetMessageType.DiscoveryResponse;
 			Interlocked.Increment(ref msg.m_recyclingCount);
-			m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, NetOutgoingMessage>(recipient, msg));
+			m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, long, NetOutgoingMessage>(recipient, 0, msg));
 		}
 	}
 }

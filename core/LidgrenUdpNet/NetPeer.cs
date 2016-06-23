@@ -117,7 +117,7 @@ namespace Lidgren.Network
 			m_configuration = config;
 			m_statistics = new NetPeerStatistics(this);
 			m_releasedIncomingMessages = new NetQueue<NetIncomingMessage>(4);
-			m_unsentUnconnectedMessages = new NetQueue<NetTuple<NetEndPoint, NetOutgoingMessage>>(2);
+			m_unsentUnconnectedMessages = new NetQueue<NetTuple<NetEndPoint, long, NetOutgoingMessage>>(2);
 			m_connections = new List<NetConnection>();
 			m_connectionLookup = new Dictionary<long, NetConnection>();
 			m_handshakes = new Dictionary<long, NetConnection>();

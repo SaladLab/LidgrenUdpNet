@@ -30,7 +30,7 @@ namespace Lidgren.Network
 
 		internal readonly NetPeerConfiguration m_configuration;
 		private readonly NetQueue<NetIncomingMessage> m_releasedIncomingMessages;
-		internal readonly NetQueue<NetTuple<NetEndPoint, NetOutgoingMessage>> m_unsentUnconnectedMessages;
+		internal readonly NetQueue<NetTuple<NetEndPoint, long, NetOutgoingMessage>> m_unsentUnconnectedMessages;
 
 		internal Dictionary<long, NetConnection> m_handshakes;
 
@@ -384,12 +384,13 @@ namespace Lidgren.Network
 				m_executeFlushSendQueue = false;
 
 				// send unsent unconnected messages
-				NetTuple<NetEndPoint, NetOutgoingMessage> unsent;
+				NetTuple<NetEndPoint, long, NetOutgoingMessage> unsent;
 				while (m_unsentUnconnectedMessages.TryDequeue(out unsent))
 				{
-					NetOutgoingMessage om = unsent.Item2;
+					long connectionId = unsent.Item2;
+					NetOutgoingMessage om = unsent.Item3;
 
-					int len = om.Encode(m_sendBuffer, 0, 0, 0);
+					int len = om.Encode(m_sendBuffer, 0, connectionId, 0);
 
 					Interlocked.Decrement(ref om.m_recyclingCount);
 					if (om.m_recyclingCount <= 0)

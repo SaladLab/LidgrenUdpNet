@@ -171,7 +171,7 @@ namespace Lidgren.Network
 			if (onLibraryThread)
 				m_peer.SendLibrary(m_connectionId, om, m_remoteEndPoint);
 			else
-				m_peer.m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, NetOutgoingMessage>(m_remoteEndPoint, om));
+				m_peer.m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, long, NetOutgoingMessage>(m_remoteEndPoint, m_connectionId, om));
 
 			m_lastHandshakeSendTime = now;
 			m_handshakeAttempts++;
@@ -193,7 +193,7 @@ namespace Lidgren.Network
 			if (onLibraryThread)
 				m_peer.SendLibrary(m_connectionId, om, m_remoteEndPoint);
 			else
-				m_peer.m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, NetOutgoingMessage>(m_remoteEndPoint, om));
+				m_peer.m_unsentUnconnectedMessages.Enqueue(new NetTuple<NetEndPoint, long, NetOutgoingMessage>(m_remoteEndPoint, m_connectionId, om));
 		}
 
 		private void WriteLocalHail(NetOutgoingMessage om)
