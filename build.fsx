@@ -46,6 +46,7 @@ Target "Help" <| fun _ ->
   ==> "AssemblyInfo"
   ==> "Restore"
   ==> "Build"
+  ==> "Test"
 
 let isPublishOnly = getBuildParam "publishonly"
 
